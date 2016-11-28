@@ -1,0 +1,192 @@
+/* Letter-spacing */
+%letter-spacing {
+	letter-spacing: -1 / 42.989128 * 1rem;
+}
+
+/* Regular Typeface */
+%regular-type {
+	font-family: $base-font-family;
+	letter-spacing: -1 / 35.989128 * 1rem;
+}
+
+@mixin ruler-patch($state) {
+	@if $state == true {
+		background-image: linear-gradient(to bottom, rgba(#9cfebc, 0.2) 1px, transparent 1px);
+		background-position: right 0;
+		background-repeat: repeat;
+		background-size: $line-height * 1rem $line-height * 1rem;
+		&:active {
+			background-image: inherit;
+		}
+	}
+}
+
+@mixin aspect-ratio($ratio /*$width/$ratio, $height*/){
+	$padding: 1 / $ratio * 100%;
+	padding-bottom: $padding;
+}
+
+@mixin blur ($radius) {
+	-webkit-filter: blur($radius+px); /* Chrome, Safari */
+	-ms-filter: blur($radius+px); /* IE12? */
+	filter: url("data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"blur\"><feGaussianBlur stdDeviation=\"#{$radius}\" /></filter></svg>#blur"); /* Firefox, Safari, Chrome*/
+	filter: progid:DXImageTransform.Microsoft.Blur(Strength=$radius); /* IE9 */
+}
+
+
+/**
+ * Viewport sized typography with minimum and maximum values
+ * @exmaple: @include responsive-font(5vw, 35px, 150px, 50px);
+ */
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false, $line-height: true) {
+	$responsive-unitless: $responsive / ($responsive - $responsive + 1);
+	$dimension: if(unit($responsive) == 'vh', 'height', 'width');
+	$min-breakpoint: $min / $responsive-unitless * 100;
+
+	@media (max-#{$dimension}: #{$min-breakpoint}) {
+		font-size: $min;
+		@if $line-height {
+			line-height: 1.5;
+		}
+	}
+
+	@if $max {
+		$max-breakpoint: $max / $responsive-unitless * 100;
+		@media (min-#{$dimension}: #{$max-breakpoint}) {
+			font-size: $max;
+			@if $line-height {
+				line-height: 1.414;
+			}
+		}
+	}
+
+	@if $fallback {
+		font-size: $fallback;
+	}
+
+	font-size: $responsive;
+	@if $line-height {
+		line-height: $responsive * 1.414;
+	}
+}
+
+
+// Font-size
+@mixin font-size($number) {
+	font-size: #{ $number * $base + 'px'};
+	font-size: #{ $number + 'rem'};
+}
+
+// Margin-top
+@mixin margin-top($number) {
+	margin-top: #{ $number * $leading + 'px'};
+	margin-top: #{ $number * $leading-rem + 'rem'};
+}
+
+// Margin-bottom
+@mixin margin-bottom($number) {
+	margin-bottom: #{ $number * $leading + 'px'};
+	margin-bottom: #{ $number * $leading-rem + 'rem'};
+}
+
+// Padding-top
+@mixin padding-top($number) {
+	padding-top: #{ $number * $leading + 'px'};
+	padding-top: #{ $number * $leading-rem + 'rem'};
+}
+
+// Padding-bottom
+@mixin padding-bottom($number) {
+	padding-bottom: #{ $number * $leading + 'px'};
+	padding-bottom: #{ $number * $leading-rem + 'rem'};
+}
+
+// Margin
+@mixin margin($top, $right, $bottom: null, $left: null) {
+	@if $left == null and $bottom == null {
+		margin: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'};
+		margin: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'};
+	} @else if $left == null or $left == $right {
+		margin: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'} #{ $bottom * $leading + 'px'};
+		margin: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'} #{ $bottom * $leading-rem + 'rem'};
+	} @else {
+		margin: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'} #{ $bottom * $leading + 'px'} #{ $left * $leading + 'px'};
+		margin: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'} #{ $bottom * $leading-rem + 'rem'} #{ $left * $leading-rem + 'rem'};
+	}
+}
+
+// Padding
+@mixin padding($top, $right, $bottom: null, $left: null) {
+	@if $left == null and $bottom == null {
+		padding: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'};
+		padding: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'};
+	} @else if $left == null or $left == $right {
+		padding: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'} #{ $bottom * $leading + 'px'};
+		padding: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'} #{ $bottom * $leading-rem + 'rem'};
+	} @else {
+		padding: #{ $top * $leading + 'px'} #{ $right * $leading + 'px'} #{ $bottom * $leading + 'px'} #{ $left * $leading + 'px'};
+		padding: #{ $top * $leading-rem + 'rem'} #{ $right * $leading-rem + 'rem'} #{ $bottom * $leading-rem + 'rem'} #{ $left * $leading-rem + 'rem'};
+	}
+}
+
+@mixin padding-equal($number) {
+	padding: #{ $number * $leading + 'px'};
+	padding: #{ $number * $leading-rem + 'rem'};
+}
+
+// Line-height
+@mixin line-height($number) {
+	line-height: #{ $number * $leading + 'px'};
+	line-height: #{ $number * $leading-rem + 'rem'};
+}
+
+// Font-Face
+@mixin font-face($name, $path, $weight: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+
+@mixin ruler-bin($state) {
+	@if $state == true {
+		background-image: linear-gradient(to bottom, rgba(aqua, .5) 1px, transparent 1px);
+		background-position: right 0;
+		background-repeat: repeat;
+		background-size: 2rem 2rem;
+		&:active {
+			background-image: inherit;
+		}
+	}
+}
+.rulerPatch {
+	display: block;
+	@include ruler-bin($showruler);
+}
+
+@mixin gradient-vertical-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) {
+	background-image: -webkit-linear-gradient($start-color, $mid-color $color-stop, $end-color);
+	background-image: -o-linear-gradient($start-color, $mid-color $color-stop, $end-color);
+	background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
+	background-repeat: no-repeat;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down, gets no color-stop at all for proper fallback
+}

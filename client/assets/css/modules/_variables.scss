@@ -1,0 +1,42 @@
+// Boolean step
+$showruler			  : false; // [ true / false ]
+
+
+// Base sizes
+$base-font-size		  : 112.5; // In %. Also used for mobile. Number only, no units.
+// $base-font-size-phone : 110; // In %. Used to calculate the phone font size. Number only, no units.
+$line-height		  : 2;
+$headings			  : (
+	h1				  : (3.911, 2.75, 3, 1),
+	h2				  : (2.941, 2, 2, 1),
+	h3				  : (2.211, 2, 1, 0),
+	h4				  : (1.663, 1, 1, 0),
+	h5				  : (1, 1, 3, .5),
+	h6				  : (1, 1, 2.5, .5)
+);
+
+/* Mobile base & leading */
+$base				 : 16 * ($base-font-size / 100);
+$leading			 : round($base * $line-height);
+$leading-rem		 : $leading / $base;
+
+/* Phone base & leading */
+// $base-phone			 : 16 * ($base-font-size-phone / 100);
+
+
+/**
+  * Colors and tints
+  */
+$soft-gray		     : #EEEEEE;
+$mustard-color       : #FFD471;
+$mustard-light-color : #FFE9B6;
+$background-color    : #363646;
+
+/**
+  * Base font stack
+  */
+$system-font         : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+// $base-font-family	 : "Omid", $system-font;
+$title-font-family	 : "Diba", $system-font;
+$base-font-family	 : "Samim", $system-font;
+// $title-font-family	 : "Lalezar", $system-font;

@@ -1,0 +1,91 @@
+/**
+  * Flexbox default class
+  * See mixins for the properties
+  */
+.Container {
+	position: relative;
+	width: $max-width * 1rem;
+	padding: 0 1rem;
+	margin: 0 auto;
+	max-width: 100%;
+	z-index: 2;
+	@media only screen and (min-width: 92.5rem) {
+		width: 92.5rem;
+	}
+}
+
+/**
+  * Rows & Columns for the grid
+  */
+.clear {
+	&:before {
+		content: "";
+		display: table;
+	}
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+// @media only screen and (max-width: $tablet) {
+// 	.hide-tablet {
+// 		display: none;
+// 	}
+// }
+
+/* On all items - add to parent container */
+:global .direction_row {
+	flex-direction: row !important;
+}
+:global .full-viewport-height {
+	min-height: 90vh;
+}
+:global .items_top {
+	align-items: flex-start;
+}
+:global .items_center_v {
+	align-items: center;
+}
+:global .items_bottom {
+	align-items: flex-end;
+}
+:global .items_baseline {
+	align-items: baseline;
+}
+:global .items_left {
+	justify-content: flex-start;
+}
+:global .items_center_h {
+	justify-content: center;
+}
+:global .items_right {
+	justify-content: flex-end;
+}
+:global .items_spaced_around {
+	justify-content: space-around;
+}
+:global .items_spaced_between {
+	justify-content: space-between;
+}
+
+/* On individual items */
+:global .item_top {
+	align-self: flex-start;
+}
+:global .item_center_v {
+	align-self: center;
+}
+:global .item_bottom {
+	align-self: flex-end;
+}
+:global .item_baseline {
+	align-self: baseline;
+}
+:global .item_first {
+	order: -1;
+}
+:global .item_last {
+	order: 1;
+}

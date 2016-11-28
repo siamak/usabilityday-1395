@@ -1,0 +1,199 @@
+@import "../../../assets/css/modules/_variables";
+@import "../../../assets/css/modules/_functions";
+@import "../../../assets/css/modules/_mixins";
+
+.Header {
+	position: relative;
+	color: #FFF;
+	width: 100%;
+	@include padding-top(1);
+	// @include padding-bottom(1);
+	// background-image: linear-gradient(-180deg, $background-color 0%, darken(#36364F, 1.5) 100%);
+	perspective: 1000px;
+	min-height: 100vh;
+	// overflow: hidden;
+	z-index: 1;
+	// &:before {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	background: rgba($background-color, 0.85);
+	// 	z-index: 0;
+	// }
+	.HeaderNav {
+		.UsabilityLogo {
+			display: inline-block;
+			vertical-align: text-bottom;
+			margin-left: 0.5em;
+			width: 1.5rem;
+			height: 1.5rem;
+			background: url(../client/assets/images/logo.svg) no-repeat center center;
+			background-size: 100%;
+		}
+		&Title {
+			font-size: 1rem;
+			margin: 0;
+			color: $soft-gray;
+		}
+		&Inline {
+			display: flex;
+			span {
+				margin-left: 1rem;
+			}
+		}
+		&Link {
+			display: flex;
+			color: #ccc;
+			// margin-right: 1.5rem;
+			font-size: 0.95em;
+			font-weight: bold;
+			&:hover {
+				color: #FEFEFE;
+			}
+			&:focus {
+				outline: 0;
+			}
+			&:last-child {
+				// margin-left: 0;
+				// margin-right: 0;
+				&:after {
+					display: none;
+				}
+			}
+			&:after {
+				content: '/';
+				display: inline-block;
+				color: #ccc;
+				margin: 0 0.75em;
+			}
+			// flex: 1;
+		}
+	}
+	.HeroHeader {
+		position: relative;
+		@include padding-top(1);
+		.title {
+			color: #FFF;
+			@extend %regular-type;
+			font-weight: bold;
+			margin-top: 0;
+			margin-bottom: 0;
+			@include responsive-font(2vw, 1rem, 1rem);
+		}
+		.heroTitle {
+			margin-top: 0;
+			color: $mustard-color;
+			@include responsive-font(7vw, 2rem, 3.75rem, 2.5rem);
+			text-shadow: 0 1px 2px rgba($mustard-light-color, 0.1);
+			@include margin-bottom(1.125);
+			@media only screen and (min-width: 92.5rem) {
+				@include margin-bottom(1.5);
+			}
+		}
+	}
+	.HeaderInfo {
+		// @media only screen and (min-width: 85rem) {
+		// 	@include margin-bottom(1);
+		// }
+		&_Title {
+			margin: 0;
+			// margin-bottom: 0.25rem;
+			@extend %regular-type;
+			@include font-size(1.5);
+			@include line-height(1.125);
+			font-weight: bold;
+			color: $mustard-light-color;
+			// color: $mustard-color;
+			background-image: url(images/block-shape.svg);
+			background-repeat: no-repeat;
+			background-position: center right;
+			padding-right: 1.25rem;
+		}
+		p {
+			margin: 0;
+			font-weight: normal;
+			@include font-size(1);
+			@media only screen and (min-width: 32rem) and (max-width: 60rem) {
+				margin-left: 1rem;
+			}
+		}
+	}
+	.HeaderFoot {
+		@include margin-bottom(1);
+		&Buttons {
+			flex-direction: row;
+			@media only screen and (max-width: 32rem) {
+				flex-direction: column;
+			}
+			:global .button {
+				display: inline-block;
+				margin-bottom: 0;
+				margin-left: 1rem;
+				width: auto;
+				// display: flex;
+				// flex: 1;
+				// max-width: 15rem;
+				@media only screen and (max-width: 32rem) {
+					display: block;
+					margin-left: 0;
+					@include margin-bottom(0.5);
+				}
+			}
+		}
+	}
+	// .Waves {
+	// 	position: absolute;
+	// 	left: 0;
+	// 	top: 0;
+	// 	width: 5rem;
+	// 	height: 4rem;
+	// 	background: url(../client/assets/images/waves.svg) no-repeat 50%;
+	// 	background-size: 100%;
+	// 	z-index: 1;
+	// }
+}
+
+.toConf {
+	color: $soft-gray;
+	position: relative;
+	font-family: $title-font-family;
+	transform: translateY(0rem);
+	font-weight: normal;
+	font-size: 5rem;
+	line-height: 1;
+	user-select: none;
+	margin-left: 1rem;
+	@include margin-top(1);
+	@include margin-bottom(1);
+	&Val {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 1.5em;
+		margin-left: 0.25rem;
+		// letter-spacing: -0.1em;
+	}
+	&Type {
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 0.85em;
+	}
+}
+
+:global .gradient {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: skewY(-15deg);
+	transform-origin: 0;
+	background: lighten(#2f2f50, 0);
+	// transition: 0.1s;
+	// transition-delay: 1s;
+	background: linear-gradient(-180deg, lighten(#2f2f50, 0) 60%,#33334a);
+	z-index: -100;
+}

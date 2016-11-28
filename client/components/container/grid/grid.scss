@@ -1,0 +1,133 @@
+/**
+  * GRID:
+  */
+$grid-columns          : 12 !default;
+$max-width			   : 72 !default;
+$grid-gutter           : 1rem !default;
+$grid-breakpoints      : ( (xs, 20rem), (sm, 32rem), (md, 60rem), (lg, 75rem) ) !default;
+
+$breakmargin		   : 20px; /* Margin added to the breakpoint */
+
+
+@import "util-grid";
+
+/**
+ * Class Name Defaults
+ *
+ * Define class names for columns, rows and offsets in case compatibility with other
+ * libraries is necessary.
+/**
+ * Calculate column size percentage
+ */
+@function get-col-percent($column-num) {
+	@return $column-num / $grid-columns * 100%;
+}
+
+/**
+ * Spacing mixin to create uniform margin/padding
+ */
+@mixin spacing( $value, $type: margin, $orientation: vertical ) {
+	@if $orientation == vertical {
+		#{ $type }-top: $value;
+		#{ $type }-bottom: $value;
+	}
+	@else {
+		#{ $type }-left: $value;
+		#{ $type }-right: $value;
+	}
+}
+
+/**
+ * Row wrapper class, flex box parent.
+ */
+.Row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	&Inline {
+		flex-direction: row;
+	}
+	// @include spacing( ( -$grid-gutter ), margin, horizontal );
+}
+
+%Col {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 0;
+	flex-shrink: 0;
+	// @include spacing( ( $grid-gutter ), padding, horizontal );
+}
+
+%Col-flex {
+	@extend %Col;
+	flex-grow: 1;
+	flex-basis: 0;
+	max-width: 100%;
+}
+/**
+ * Generate a set of grid column classes using a namespace
+ *
+ * .Col-[namespace] for intelligent column division
+ * .Col-[namespace]-[number] for a column that covers a specific number of columns (e.g. 1-12 by default)
+ * .Off-[namespace]-[number] for pushing a col a specific number of columns (e.g. 1-11 by default)
+ */
+@mixin grid-base( $namespace ) {
+	.Col_#{$namespace} {
+		@extend %Col-flex;
+	}
+	@for $i from 1 through $grid-columns {
+		.Col_#{$namespace}_#{$i} {
+			@extend %Col;
+		}
+	}
+}
+@mixin grid-sizes( $namespace ) {
+	// Run the loop for as many columns as speficied
+	@for $i from 1 through $grid-columns {
+		.Col_#{$namespace}_#{$i} {
+			flex-basis: get-col-percent($i);
+			max-width: get-col-percent($i);
+		}
+	}
+	// @for $i from 1 through $grid-columns {
+	// 	// Don't include the .off class for the last column
+	// 	@if ( $i != $grid-columns ) {
+	// 		.Off-#{$namespace}-#{$i} {
+	// 			margin-left: get-col-percent($i);
+	// 		}
+	// 	}
+	// }
+}
+/**
+ * Build the grid in two steps, to help minimize file size
+ * Step 1, for each namespace, create the grid-base
+ * Step 2, for each namespace, wrap the col width/offset measurements in their breakpoint media query
+ */
+@each $val in $grid-breakpoints {
+	$namespace: nth($val, 1);
+	@include grid-base( $namespace );
+}
+
+@each $val in $grid-breakpoints {
+	 @if length($val) == 1{
+		$namespace: nth($val, 1);
+		@include grid-sizes( $namespace );
+	}
+	@else {
+		$namespace: nth($val, 1);
+		$size: nth($val, 2);
+		@media only screen and (min-width: #{$size}) {
+			@include grid-sizes( $namespace );
+		}
+	}
+}
+
+@media only screen and (max-width: 32rem) {
+	:global .offMobile {
+		display: none;
+	}
+	:global .wow {
+		margin: 1rem auto 1rem;
+	}
+}

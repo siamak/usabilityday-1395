@@ -1,0 +1,156 @@
+*{
+	box-sizing: border-box;
+	&:after, &:before {
+		box-sizing: border-box;
+	}
+	&:active, &:focus{
+		outline: 0;
+	}
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+html {
+	font-size: $base * 1px;
+	font-size: $base-font-size * 1%;
+	line-height: $line-height;
+	font-family: $base-font-family;
+	font-weight: 300;
+	highlight-color: rgba(0,0,0,0);
+	text-rendering: optimizeLegibility;
+	-webkit-font-feature-settings: "liga", "kern";
+	-webkit-font-smoothing: antialiased;
+	@include responsive-font(2vw, 1rem, $base * 1px, 16px, false);
+}
+
+body {
+	color: #212121;
+	direction: rtl;
+	overflow-y: auto;
+	direction: rtl;
+	min-height: 100vh;
+	background-color: darken(#36364F, 1.5);
+}
+
+a {
+	color: #212121;
+	text-decoration: none;
+	&:hover{
+		color: $soft-gray;
+	}
+	&:focus, &:active {
+		outline: 1px dotted;
+	}
+}
+
+img {
+	border-width: 0;
+	max-width: 100%;
+}
+
+ul {
+	margin: 0 exponent(1.33, 2) * 1em;
+	padding: 0;
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+::selection {
+	color: #fefefe;
+	background-color: rgba(#23e, 0.9);
+}
+
+iframe {
+	display: block;
+	margin: 1em auto;
+}
+
+figure {
+	margin: 0;
+}
+
+mark {
+	background-color: rgba(39,243,106, .1);
+	background-color: mix(#fff, rgba(57, 252, 121, 1), 50);
+}
+
+.hero-image{
+	display: block;
+	img{
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+		zoom: 1;
+	}
+}
+
+
+:global .patch {
+	@include ruler-patch(true);
+}
+
+
+:global .icon {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	&.space-center {
+		display: block;
+		margin: 0 auto;
+	}
+	&.space-left {
+		margin-left: 0.5em;
+	}
+	&.space-right {
+		margin-right: 0.5em;
+	}
+}
+
+
+:global .FigureRight {
+	position: relative;
+	float: right;
+	margin-left: 1.5rem;
+	width: 9rem;
+	max-width: 100%;
+	img {
+		display: block;
+		margin: 0 auto;
+		object-fit: cover;
+	}
+	@media only screen and (max-width: 60rem) {
+		float: none;
+		@include margin-bottom(0.5);
+	}
+}
+
+:global .FigureOverflow {
+	overflow: hidden;
+	display: block;
+}
+
+:global .IsBold {
+	font-weight: bold;
+}
+
+:global a[href^="http://maps.google.com/maps"]{display:none !important}
+
+:global .gmnoprint a, :global .gmnoprint span {
+	display:none;
+}
+:global .gmnoprint div {
+	background:none !important;
+}
+
+:global .evand-copyright {
+	display: none;
+}
+
+:global .SystemFont {
+	font-family: $system-font;
+}

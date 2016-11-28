@@ -1,0 +1,92 @@
+:global .button {
+	position: relative;
+	display: block;
+	width: 15rem;
+	max-width: 100%;
+	// padding: 0.5rem 1rem;
+	@include padding(0.25, 0.5, 0.25, 0.5);
+	margin: 0 5px;
+	@include margin-bottom(0.5);
+	background-color: #333;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	text-shadow: 0 1px 1px rgba(black, 0.1);
+	border: 0;
+	box-shadow: 0 2px 0 rgba(black, 0.25);
+	transition: .1s cubic-bezier(0.3, 0.63, 0.9, 0.26);
+	user-select: none;
+	span {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&:active, &:focus {
+		outline: 0;
+	}
+	&:after,
+	&:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 5px;
+		left: -5px;
+		width: 5px;
+		height: calc(100% - 10px);
+		transition: .1s cubic-bezier(0.3, 0.63, 0.9, 0.26);
+	}
+	&:after {
+		left: auto;
+		right: -5px;
+	}
+	&:hover {
+		background-color: #eee;
+	}
+	&.blue {
+		background-color: #23e;
+		&:after,
+		&:before {
+			background-color: #23e;
+		}
+		&:hover {
+			color: #333;
+			background-color: #eee;
+			&:after,
+			&:before {
+				background-color: #eee;
+			}
+		}
+		&:active, &:focus {
+			color: #FFF;
+			background-color: darken(#23e, 15);
+			&:after,
+			&:before {
+				background-color: darken(#23e, 15);
+			}
+		}
+	}
+	&.mustard {
+		background-color: $mustard-color;
+		color: darken($mustard-color, 55);
+		&:after,
+		&:before {
+			background-color: $mustard-color;
+		}
+		&:hover {
+			// color: #333;
+			background-color: $mustard-light-color;
+			&:after,
+			&:before {
+				background-color: $mustard-light-color;
+			}
+		}
+		&:active, &:focus {
+			// color: #FFF;
+			background-color: darken($mustard-color, 10);
+			&:after,
+			&:before {
+				background-color: darken($mustard-color, 10);
+			}
+		}
+	}
+}

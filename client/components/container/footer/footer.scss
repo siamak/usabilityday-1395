@@ -1,0 +1,46 @@
+@import "../../../assets/css/modules/_variables";
+@import "../../../assets/css/modules/_functions";
+@import "../../../assets/css/modules/_mixins";
+
+.Footer {
+	// @include margin-top(1);
+	@include padding(1, 0, 1, 0);
+	color: #e6e6e6;
+	.richText {
+		margin: 0;
+		color: #e6e6e6;
+		@include font-size(0.9);
+		@include line-height(1);
+		// color: #FFF;
+		@extend %regular-type;
+		letter-spacing: -1 / 20.989128 * 1rem;
+		font-weight: bold;
+	}
+	.slogan {
+		display: inline-block;
+		margin-right: 1rem;
+	}
+	.Siamak {
+		display: table;
+		@include margin-top(0.35);
+	}
+	.SocialLinks {
+		@media only screen and (max-width: 48rem) {
+			@include margin-top(1);
+			align-items: center;
+		}
+		a {
+			display: flex;
+			transition: 0.2s ease-in-out;
+			transform: scale(1);
+			transform-origin: bottom 50%;
+			user-select: none;
+			highlight-color: rgba(0,0,0,0);
+			outline: 0;
+			&:hover {
+				opacity: 0.5;
+				transform: scale(0.9);
+			}
+		}
+	}
+}

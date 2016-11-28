@@ -1,0 +1,157 @@
+/**
+ * Paragraph
+ */
+
+/* Initial paragraph `</p>` */
+:global p {
+	word-wrap: break-word;
+	// padding-top: 1px;
+	margin: 0;
+	// @include margin-bottom(1);
+	word-spacing: -1 / 10.989128 * 1rem;
+	&.Lead {
+		margin-top: 0;
+		@include font-size(1);
+		@include margin-bottom(1);
+		@include line-height(1);
+	}
+}
+
+
+/**
+ * Heading
+ */
+
+
+/* Set headings sizes, line-heights and margins  */
+@each $heading, $properties in $headings {
+	:global #{$heading}.typescale,
+	:global .content #{$heading} {
+		@include font-size(nth($properties, 1));
+		@include line-height(nth($properties, 2));
+		@include margin-top(nth($properties, 3));
+		@include margin-bottom(nth($properties, 4));
+		word-spacing: -0.075em;
+		@extend %letter-spacing;
+	}
+}
+
+/* Set margins between headings */
+h1 + h2 {
+	@include margin-top(1);
+}
+
+h2 + h3,
+h3 + h4,
+h4 + h5 {
+	@include margin-top(.5);
+}
+
+h5 + h6 {
+	@include margin-top(-.5);
+}
+
+h6 {
+	font-weight: normal;
+}
+
+/* Change headings font if a heading font is set */
+@if $title-font-family != null {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: $title-font-family;
+		font-weight: normal;
+	}
+}
+
+
+/**
+ * Figures & other elements
+ */
+figcaption {
+	@include line-height(1);
+	// @include padding-equal(0.25);
+	// font-size: .8125rem;
+	margin-bottom: 0rem;
+}
+
+blockquote {
+	font-size: 95%;
+}
+
+cite {
+	font-style: normal;
+}
+
+/* Quotes */
+figure {
+	&:not(blockquote) {
+		@include margin-bottom(1);
+	}
+	blockquote {
+		margin: 0;
+		@include padding(0.45, 0.75);
+		p {
+			@include font-size(1);
+			@include line-height(1.05);
+			margin: 0;
+		}
+	}
+}
+
+/* Lists */
+ul, ol {
+	li {
+		margin-bottom: 0;
+	}
+}
+
+
+small {
+	@include line-height(.5);
+}
+
+code {
+	@include padding-equal(1);
+}
+
+:global .align-center {
+	text-align: center;
+}
+:global .align-right {
+	text-align: right;
+}
+:global .align-left {
+	text-align: left;
+}
+
+/* Horizontal rule */
+hr {
+	border: 0;
+	color: $soft-gray;
+	// border-bottom: 1px solid $soft-gray;
+	// width: exponent(1.33, 5) * 1rem;
+	display: block;
+	margin: -3px auto;
+	@include margin-bottom(1);
+	// &.beats {
+		// background: url(../images/wave.svg) no-repeat center center;
+		background-size: 100%;
+		margin-top: 0;
+		width: exponent(1.33, 6) * 1rem;
+		height: 2rem;
+		line-height: 1;
+		border-bottom: 0;
+	// }
+}
+
+// @media screen and (max-width: $phone-landscape-size) {
+// 	html {
+// 		font-size: #{$base-phone + 'px'};
+// 		font-size: #{$base-font-size-phone / 100 + 'rem'};
+// 	}
+// }
